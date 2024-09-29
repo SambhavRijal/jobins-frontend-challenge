@@ -76,15 +76,26 @@ module.exports = {
     colors: {
       ...colors,
       primary: {
-        default: '#F5F5F5'
+        default: '#F5F5F5',
+        gray: '#8B909A',
+        border: '#DBDADE',
+        dark: '#23272E',
+        light: '#F1F2F6'
       },
       secondary: {
-        default: '#ffffff'
+        default: '#ffffff',
+        gray: '#E9E7FD',
+        blue: '#0F60FF',
+        orange: '#FFC600',
+        light: '#F3F4F8'
       },
 
       success: {
-        default: '#00BA88',
+        default: '#1EB564',
         pending: '#B0BA00'
+      },
+      danger: {
+        default: '#EA5455'
       },
 
       buttonColor: {
