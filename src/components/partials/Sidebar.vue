@@ -1,14 +1,14 @@
 <template>
   <aside
     :class="[
-      'sidebar bg-secondary-default text-primary-gray',
+      'sidebar bg-secondary-default text-primary-gray ',
       sidebarOpen ? 'w-1/6' : 'w-20',
       'flex',
       'flex-col',
       'h-screen',
       'transition-all',
       'duration-300',
-      'ease-in-out px-md'
+      'ease-in-out px-md '
     ]"
   >
     <div class="sidebar-header flex items-center justify-between py-sm">
@@ -16,15 +16,13 @@
         <img src="@/assets/logo.svg" alt="JoBins Logo" class="w-[28px] h-[28px]" />
         <span class="text-2xl font-bold text-primary-dark">JoBins</span>
       </div>
-      <div class="control cursor-pointer text-white" @click="sidebarOpen = !sidebarOpen">
+      <div class="control cursor-pointer text-white" @click="toggleSidebar">
         <img v-if="sidebarOpen" src="@/assets/logo.svg" alt="Collapse" class="w-[28px] h-[28px]" />
         <img v-else src="@/assets/logo.svg" alt="Expand" class="w-[28px] h-[28px]" />
       </div>
     </div>
     <div>
-      <div class="main-menu">
-        <p class="text-xs uppercase text-primary-gray py-sm px-sm">Main Menu</p>
-      </div>
+      <p class="text-xs uppercase text-primary-gray py-sm px-sm" v-if="sidebarOpen">Main Menu</p>
       <nav class="flex flex-col gap-xs mt-4">
         <RouterLink to="/" class="flex items-center py-xs bg-secondary-light px-sm rounded-md">
           <img src="@/assets/logo.svg" alt="Dashboard" class="w-[22px] h-[22px]" />
@@ -40,10 +38,10 @@
         </RouterLink>
       </nav>
     </div>
-    <div class="mt-sm">
-      <div class="products-menu">
-        <p class="text-xs uppercase text-primary-gray py-sm px-sm">Products</p>
-      </div>
+    <div class="">
+      <p class="text-xs uppercase text-primary-gray py-sm px-sm mt-sm" v-if="sidebarOpen">
+        Products
+      </p>
       <nav class="flex flex-col gap-xs">
         <RouterLink to="/" class="flex items-center py-xs px-sm">
           <img src="@/assets/logo.svg" alt="Dashboard" class="w-[22px] h-[22px]" />
@@ -57,9 +55,28 @@
     </div>
   </aside>
 </template>
+
 <script setup lang="ts">
 import { RouterLink } from 'vue-router'
-import { ref } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 
-const sidebarOpen = ref(true)
+const sidebarOpen = ref(window.innerWidth > 1024)
+
+const checkScreenSize = () => {
+  sidebarOpen.value = window.innerWidth > 1024
+}
+
+const toggleSidebar = () => {
+  if (window.innerWidth > 788) {
+    sidebarOpen.value = !sidebarOpen.value
+  }
+}
+
+onMounted(() => {
+  window.addEventListener('resize', checkScreenSize)
+})
+
+onUnmounted(() => {
+  window.removeEventListener('resize', checkScreenSize)
+})
 </script>
