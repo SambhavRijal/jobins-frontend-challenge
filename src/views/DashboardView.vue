@@ -2,7 +2,7 @@
   <div class="dashboard">
     <DashboardStats />
     <AccountInformation />
-    <!-- <DashboardTable /> -->
+    <DashboardTable />
   </div>
 </template>
 
