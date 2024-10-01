@@ -2,9 +2,9 @@
   <div
     class="image w-1/4 md:w-1/3 border-r border-primary-border pr-xs md:pr-sm flex items-center justify-center"
   >
-    <img src="@/assets/logo.svg" alt="US Flag" class="mr-xs" />
+    <img src="@/assets/business-and-finance.png" alt="US Flag" class="mr-xs" />
   </div>
-  <div class="stats w-2/3 flex flex-col gap-sm md:gap-lg px-sm md:px-lg">
+  <div class="stats w-2/3 flex flex-col gap-sm md:gap-lg xl:justify-between px-sm md:px-lg">
     <div class="stats-title">
       <p class="text-sm md:text-lg font-semibold text-primary-dark uppercase">
         Total Sales & Costs

@@ -1,7 +1,7 @@
 <template>
   <div class="heading flex gap-sm items-center">
     <div class="left">
-      <img src="@/assets/logo.svg" alt="US Flag" class="mr-xs w-[43px] h-[43px]" />
+      <img src="@/assets/yen.png" alt="US Flag" class="mr-xs w-[43px] h-[43px]" />
     </div>
     <div class="right">
       <p class="text-sm md:text-lg font-semibold text-primary-dark uppercase">Total Profit</p>

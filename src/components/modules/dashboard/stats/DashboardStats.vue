@@ -13,7 +13,7 @@
     </div>
 
     <div
-      class="bg-white py-md px-sm md:px-lg rounded-xl flex flex-col gap-xxs md:gap-none justify-between col-span-12 xl:col-span-5"
+      class="bg-white py-md px-sm md:px-lg rounded-xl flex flex-col gap-xs justify-between col-span-12 xl:col-span-5"
     >
       <CountryStats />
     </div>

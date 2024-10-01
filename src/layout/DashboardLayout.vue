@@ -8,7 +8,7 @@
       <Header />
       <main
         :class="[
-          'h-[calc(100vh-62px)] overflow-y-scroll px-xs md:px-md',
+          'h-[calc(100vh-70px)] overflow-y-scroll px-xs md:px-md',
           sidebarOpen ? 'w-[calc(100vw-300px)]' : 'w-[calc(100vw-70px)]'
         ]"
       >
