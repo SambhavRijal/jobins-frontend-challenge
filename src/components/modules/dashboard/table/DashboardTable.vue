@@ -23,7 +23,7 @@
     </div>
 
     <div class="">
-      <div class="bg-white px-lg py-xs rounded-xl my-md text-primary-dark">
+      <div class="bg-white px-lg py-xs rounded-2xl my-md text-primary-dark">
         <div class="search-table-outter overflow-x-auto wrapper">
           <table class="search-table inner w-full">
             <thead>

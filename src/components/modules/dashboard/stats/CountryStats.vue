@@ -16,7 +16,9 @@
     </div>
 
     <!-- Progress Percentage -->
-    <span class="w-fit text-success-default text-sm font-semibold flex justify-end">↑ 25.8%</span>
+    <span class="w-fit text-success-default text-sm font-semibold flex gap-xs justify-end"
+      ><IconChevronUp size="20" /> 25.8%</span
+    >
   </div>
 
   <!-- Single Country -->
@@ -36,7 +38,9 @@
     </div>
 
     <!-- Progress Percentage -->
-    <span class="w-fit text-danger-default text-sm font-semibold flex justify-end">↑ 16.2%</span>
+    <span class="w-fit text-danger-default text-sm font-semibold flex gap-xs justify-end"
+      ><IconChevronDown size="20" /> 16.2%</span
+    >
   </div>
 
   <!-- Single Country -->
@@ -56,6 +60,12 @@
     </div>
 
     <!-- Progress Percentage -->
-    <span class="w-fit text-danger-default text-sm font-semibold flex justify-end">↑ 11.9%</span>
+    <span class="w-fit text-danger-default text-sm font-semibold flex gap-xs justify-end"
+      ><IconChevronDown size="20" /> 11.9%</span
+    >
   </div>
 </template>
+
+<script setup lang="ts">
+import { IconChevronUp, IconChevronDown } from '@tabler/icons-vue'
+</script>

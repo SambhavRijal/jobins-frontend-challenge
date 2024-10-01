@@ -13,9 +13,17 @@
     </div>
     <div class="stats-value flex flex-col gap-xs">
       <p class="text-xl md:text-3xl font-bold">$350K</p>
-      <p class="text-xs md:text-sm text-primary-gray">
-        <span class="text-success-default mr-xs">↑ 8.56K </span> vs last 7 days
+      <p class="text-xs md:text-sm text-primary-gray flex items-center">
+        <span class="text-success-default mr-xs flex items-center gap-xxs w-fit"
+          ><IconArrowUp size="16" />
+          <span class="pt-xxs">8.56K</span>
+        </span>
+        <span class="pt-xxs"> vs last 7 days </span>
       </p>
     </div>
   </div>
 </template>
+
+<script setup lang="ts">
+import { IconArrowUp } from '@tabler/icons-vue'
+</script>
