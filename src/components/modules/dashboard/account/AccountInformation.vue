@@ -4,19 +4,19 @@
       <div
         class="flex items-center space-x-md col-span-full xl:col-span-2 xl:border-r border-primary-border"
       >
-        <UserInfo />
+        <UserInfo :userInfo="userInfo" />
       </div>
 
       <div
         class="col-span-full md:col-span-6 xl:col-span-2 xl:border-r border-primary-border md:pb-lg flex flex-col gap-sm text-sm"
       >
-        <PersonalInfo />
+        <PersonalInfo :userInfo="userInfo" />
       </div>
 
       <div
         class="col-span-full md:col-span-6 xl:col-span-2 pb-lg flex flex-col gap-sm text-sm md:pr-md"
       >
-        <AddressInfo />
+        <AddressInfo :userInfo="userInfo" />
       </div>
     </div>
     <div class="tab-controls flex gap-sm w-full text-sm md:text-base">
@@ -33,4 +33,14 @@
 import UserInfo from './UserInfo.vue'
 import PersonalInfo from './PersonalInfo.vue'
 import AddressInfo from './AddressInfo.vue'
+
+import { GetRequest } from '@/plugins/https'
+import { onMounted, ref } from 'vue'
+
+const userInfo = ref<any>({})
+
+onMounted(async () => {
+  const response = await GetRequest('/users')
+  userInfo.value = response.data[0]
+})
 </script>

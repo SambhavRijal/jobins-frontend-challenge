@@ -14,6 +14,7 @@
   },
   "dependencies": {
     "@tabler/icons-vue": "^3.19.0",
+    "axios": "^1.7.7",
     "vue": "^3.4.29",
     "vue-router": "^4.3.3"
   },

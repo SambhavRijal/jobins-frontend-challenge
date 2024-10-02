@@ -22,86 +22,48 @@
       </div>
     </div>
 
-    <div class="">
-      <div class="bg-white px-lg py-xs rounded-2xl my-md text-primary-dark">
-        <div class="search-table-outter overflow-x-auto wrapper">
-          <table class="search-table inner w-full">
-            <thead>
-              <tr class="text-left text-sm text-primary-gray font-medium border-b border-gray-200">
-                <th class="py-sm px-xs whitespace-nowrap">ID</th>
-                <th class="py-sm px-xs whitespace-nowrap">CUSTOMER</th>
-                <th class="py-sm px-xs whitespace-nowrap">DATE</th>
-                <th class="py-sm px-xs whitespace-nowrap">TOTAL</th>
-                <th class="py-sm px-xs whitespace-nowrap">METHOD</th>
-                <th class="py-sm px-xs whitespace-nowrap">STATUS</th>
-                <th class="py-sm px-xs whitespace-nowrap">ACTION</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr v-for="i in 5" :key="i" class="border-b border-gray-200">
-                <td class="py-sm px-xs whitespace-nowrap">#5089</td>
-                <td class="py-sm px-xs whitespace-nowrap">Jensen Wheeler</td>
-                <td class="py-sm px-xs whitespace-nowrap">6 April, 2023</td>
-                <td class="py-sm px-xs whitespace-nowrap">$2,564</td>
-                <td class="py-sm px-xs whitespace-nowrap">CC</td>
-                <td class="py-sm px-xs text-secondary-orange font-semibold whitespace-nowrap">
-                  Pending
-                </td>
-                <td class="py-xs px-xs whitespace-nowrap">
-                  <a href="#" class="text-secondary-blue hover:underline">View Details</a>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        <div
-          class="flex flex-col gap-xs md:gap-none sm:flex-row justify-between md:items-center mt-sm"
-        >
-          <div class="text-sm text-gray-500 mb-xs sm:mb-none">
-            Showing
-            <button
-              class="px-sm py-xxs mx-xs rounded-md border border-secondary-gray text-primary-dark font-medium"
-            >
-              <div class="flex items-center gap-xxs">10 <IconChevronDown size="16" /></div>
-            </button>
-            of 50 entries
-          </div>
-          <div class="flex justify-between gap-xxs">
-            <button class="px-sm h-fit py-xxs rounded-md bg-primary-light text-primary-gray">
-              &lt;
-            </button>
-            <button class="px-sm h-fit py-xxs rounded-md bg-secondary-blue text-white">1</button>
-            <button class="px-sm h-fit py-xxs rounded-md bg-primary-light text-primary-gray">
-              2
-            </button>
-            <button class="px-sm h-fit py-xxs rounded-md bg-primary-light text-primary-gray">
-              3
-            </button>
-            <button class="px-sm h-fit py-xxs rounded-md bg-primary-light text-primary-gray">
-              4
-            </button>
-            <button class="px-sm h-fit py-xxs rounded-md bg-primary-light text-primary-gray">
-              5
-            </button>
-            <button class="px-sm h-fit py-xxs rounded-md bg-primary-light text-primary-gray">
-              &gt;
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
     <!-- Table -->
+    <DataTable
+      :tableData="tableData"
+      :totalPages="totalPages"
+      :currentPage="currentPage"
+      :pageLimit="pageLimit"
+      :totalEntries="totalEntries"
+      @limitChange="handleLimitChange"
+    />
   </div>
 </template>
 
-<style>
-th,
-td {
-  min-width: 200px;
-}
-</style>
-
 <script setup>
 import { IconChevronDown, IconSearch } from '@tabler/icons-vue'
+import DataTable from './DataTable.vue'
+import { GetRequest } from '@/plugins/https'
+import { ref, onMounted, watch } from 'vue'
+
+const tableData = ref([])
+const totalPages = ref(0)
+const currentPage = ref(1)
+const pageLimit = ref(5)
+const totalEntries = ref(0)
+
+const getTableData = async () => {
+  const res = await GetRequest(`/orders?page=${currentPage.value}&limit=${pageLimit.value}`)
+  tableData.value = res.data.results
+  totalPages.value = res.data.pages
+  currentPage.value = res.data.page
+  totalEntries.value = res.data.total
+}
+
+onMounted(async () => {
+  await getTableData()
+})
+
+watch([currentPage, pageLimit], async () => {
+  console.log('Current page or page limit changed', currentPage.value, pageLimit.value)
+  await getTableData()
+})
+
+const handleLimitChange = (limit) => {
+  pageLimit.value = limit
+}
 </script>
