@@ -19,12 +19,28 @@
         <AddressInfo :userInfo="userInfo" />
       </div>
     </div>
-    <div class="tab-controls flex gap-sm w-full text-sm md:text-base">
-      <div class="tab px-sm py-xs text-secondary-blue border-b-2 border-secondary-blue">
+    <div class="tab-controls flex gap-sm w-full text-sm md:text-base overflow-x-auto">
+      <div
+        class="tab px-sm py-xs cursor-pointer transition-colors duration-300 hover:text-secondary-blue whitespace-nowrap"
+        :class="{ 'text-secondary-blue border-b-2 border-secondary-blue': status === 'all' }"
+        @click="handleStatusChange('all')"
+      >
         All Orders
       </div>
-      <div class="tab px-sm py-xs">Completed</div>
-      <div class="tab px-sm py-xs">Canceled</div>
+      <div
+        class="tab px-sm py-xs cursor-pointer transition-colors duration-300 hover:text-secondary-blue whitespace-nowrap"
+        :class="{ 'text-secondary-blue border-b-2 border-secondary-blue': status === 'completed' }"
+        @click="handleStatusChange('completed')"
+      >
+        Completed
+      </div>
+      <div
+        class="tab px-sm py-xs cursor-pointer transition-colors duration-300 hover:text-secondary-blue whitespace-nowrap"
+        :class="{ 'text-secondary-blue border-b-2 border-secondary-blue': status === 'canceled' }"
+        @click="handleStatusChange('canceled')"
+      >
+        Canceled
+      </div>
     </div>
   </div>
 </template>
@@ -35,9 +51,24 @@ import PersonalInfo from './PersonalInfo.vue'
 import AddressInfo from './AddressInfo.vue'
 
 import { GetRequest } from '@/plugins/https'
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, computed } from 'vue'
 
 const userInfo = ref<any>({})
+
+const props = defineProps({
+  status: {
+    type: String,
+    required: true
+  }
+})
+
+const emit = defineEmits(['statusChange'])
+
+const status = computed(() => props.status)
+
+const handleStatusChange = (newStatus: string) => {
+  emit('statusChange', newStatus)
+}
 
 onMounted(async () => {
   const response = await GetRequest('/users')

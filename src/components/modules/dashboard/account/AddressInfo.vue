@@ -21,9 +21,12 @@
 import { GetRequest } from '@/plugins/https'
 import { onMounted, ref, defineProps } from 'vue'
 
-defineProps<{
-  userInfo: any
-}>()
+defineProps({
+  userInfo: {
+    type: Object,
+    required: true
+  }
+})
 
 const orderSummary = ref<any>({})
 

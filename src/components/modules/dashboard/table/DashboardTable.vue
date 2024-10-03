@@ -3,8 +3,9 @@
     <div
       class="table-controls flex flex-col gap-sm md:gap-none md:flex-row justify-between text-primary-gray"
     >
-      <div class="left flex gap-sm w-full md:w-2/3 lg:w-1/3">
-        <div class="h-full bg-white cursor-pointer hover:bg-gray-100 rounded-md px-sm">
+      <div class="left flex flex-col sm:flex-row gap-sm w-full md:w-2/3 lg:w-1/3">
+        <!-- Status Select -->
+        <div class="h-full w-fit bg-white cursor-pointer hover:bg-gray-100 rounded-md px-sm">
           <select
             class="border-none cursor-pointer outline-none bg-transparent h-full py-xs font-medium rounded-md"
             v-model="status"
@@ -19,6 +20,7 @@
           </select>
         </div>
 
+        <!-- Search -->
         <div
           class="search bg-white px-sm py-xs rounded-md grow md:w-1/4 flex items-center justify-between"
         >
@@ -32,7 +34,8 @@
           <IconSearch size="18" />
         </div>
       </div>
-      <div class="right cursor-pointer">
+      <div class="right cursor-pointer w-fit">
+        <!-- Date Range -->
         <div class="h-full bg-white hover:bg-gray-100 rounded-md px-sm">
           <select
             class="border-none cursor-pointer outline-none bg-transparent h-full py-xs font-medium rounded-md"
@@ -65,19 +68,27 @@
 </template>
 
 <script setup>
-import { IconChevronDown, IconSearch } from '@tabler/icons-vue'
+import { IconSearch } from '@tabler/icons-vue'
 import DataTable from './DataTable.vue'
 import { GetRequest } from '@/plugins/https'
-import { ref, onMounted, watch } from 'vue'
+import { ref, onMounted, watch, computed } from 'vue'
+
+const props = defineProps({
+  status: {
+    type: String,
+    required: true
+  }
+})
 
 const tableData = ref([])
 const totalPages = ref(0)
 const currentPage = ref(1)
 const pageLimit = ref(5)
 const totalEntries = ref(0)
-const status = ref('all')
 const dateRange = ref('all')
 const searchQuery = ref('')
+const status = computed(() => props.status)
+const emit = defineEmits(['statusChange'])
 
 const getTableData = async () => {
   const res = await GetRequest(
@@ -109,9 +120,8 @@ const handleLimitChange = (limit) => {
 const handlePageChange = (page) => {
   currentPage.value = page
 }
-
-const handleStatusChange = (status) => {
-  status.value = status
+const handleStatusChange = (event) => {
+  emit('statusChange', event.target.value)
 }
 
 const handleDateRangeChange = (dateRange) => {

@@ -18,7 +18,7 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup>
 import { RouterLink, RouterView } from 'vue-router'
 import Sidebar from '@/components/partials/Sidebar.vue'
 import Header from '@/components/partials/Header.vue'
