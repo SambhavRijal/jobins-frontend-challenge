@@ -18,7 +18,7 @@
             <tr v-for="item in tableData" :key="item.id" class="border-b border-gray-200">
               <td class="py-sm px-xs whitespace-nowrap">#{{ item.oid }}</td>
               <td class="py-sm px-xs whitespace-nowrap">{{ item.customer }}</td>
-              <td class="py-sm px-xs whitespace-nowrap">{{ item.date }}</td>
+              <td class="py-sm px-xs whitespace-nowrap">{{ item?.createdAt }}</td>
               <td class="py-sm px-xs whitespace-nowrap">${{ item.total }}</td>
               <td class="py-sm px-xs whitespace-nowrap">{{ item.method }}</td>
               <td class="py-sm px-xs text-secondary-orange font-semibold whitespace-nowrap">
@@ -57,24 +57,34 @@
 
           of {{ totalEntries }} entries
         </div>
-        <div class="flex justify-between gap-xxs">
-          <button class="px-sm h-fit py-xxs rounded-md bg-primary-light text-primary-gray">
+        <div class="flex gap-xxs">
+          <button
+            class="px-sm h-fit py-xxs rounded-md bg-primary-light text-primary-gray hover:bg-secondary-blue/50 hover:text-white transition-colors duration-200"
+            @click="handlePageChange(currentPage - 1)"
+            :disabled="currentPage === 1"
+            :class="{ 'opacity-50 cursor-not-allowed': currentPage === 1 }"
+          >
             &lt;
           </button>
-          <button class="px-sm h-fit py-xxs rounded-md bg-secondary-blue text-white">1</button>
-          <button class="px-sm h-fit py-xxs rounded-md bg-primary-light text-primary-gray">
-            2
+          <button
+            v-for="page in pages"
+            :key="page"
+            @click="handlePageChange(page)"
+            class="px-sm h-fit py-xxs rounded-md transition-colors duration-200"
+            :class="
+              page === currentPage
+                ? 'bg-secondary-blue text-white'
+                : 'bg-primary-light text-primary-gray hover:bg-secondary-blue/50 hover:text-white'
+            "
+          >
+            {{ page }}
           </button>
-          <button class="px-sm h-fit py-xxs rounded-md bg-primary-light text-primary-gray">
-            3
-          </button>
-          <button class="px-sm h-fit py-xxs rounded-md bg-primary-light text-primary-gray">
-            4
-          </button>
-          <button class="px-sm h-fit py-xxs rounded-md bg-primary-light text-primary-gray">
-            5
-          </button>
-          <button class="px-sm h-fit py-xxs rounded-md bg-primary-light text-primary-gray">
+          <button
+            class="px-sm h-fit py-xxs rounded-md bg-primary-light text-primary-gray hover:bg-secondary-blue/50 hover:text-white transition-colors duration-200"
+            @click="handlePageChange(currentPage + 1)"
+            :disabled="currentPage === totalPages"
+            :class="{ 'opacity-50 cursor-not-allowed': currentPage === totalPages }"
+          >
             &gt;
           </button>
         </div>
@@ -100,16 +110,35 @@ const props = defineProps<{
   totalEntries: number
 }>()
 
-const emit = defineEmits(['limitChange'])
+const emit = defineEmits(['limitChange', 'pageChange'])
 
 const limit = computed(() => props.pageLimit)
 
-watch(limit, (newVal, oldVal) => {
-  console.log('Limit changed', newVal, oldVal)
+const pages = computed(() => {
+  console.log('props.totalPages', props.totalPages)
+  if (props.totalPages <= 5) {
+    const newPages = Array.from({ length: props.totalPages }, (_, i) => i + 1)
+    console.log('newPages', newPages)
+    return newPages
+  } else {
+    console.log('greater than 5')
+    let start = Math.max(1, props.currentPage - 2)
+    let end = Math.min(props.totalPages, start + 4)
+
+    // Adjust start if we're near the end
+    if (end === props.totalPages) {
+      start = Math.max(1, end - 4)
+    }
+
+    return Array.from({ length: end - start + 1 }, (_, i) => start + i)
+  }
 })
 
+const handlePageChange = (page: number) => {
+  emit('pageChange', page)
+}
+
 const handleLimitChange = (event: any) => {
-  console.log('Limit changed', event.target.value)
   emit('limitChange', event.target.value)
 }
 </script>
