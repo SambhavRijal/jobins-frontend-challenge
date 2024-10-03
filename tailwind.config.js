@@ -125,6 +125,21 @@ module.exports = {
       '6xl': '108px',
       '7xl': '124px',
       med: '3.75rem'
+    },
+    extend: {
+      keyframes: {
+        'fade-in-down': {
+          '0%': {
+            opacity: '0'
+          },
+          '100%': {
+            opacity: '1'
+          }
+        }
+      },
+      animation: {
+        'fade-in-down': 'fade-in-down 1s ease-out'
+      }
     }
   },
   variants: {

@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-white px-sm md:px-lg rounded-2xl mt-md text-primary-dark">
+  <div class="bg-white px-sm md:px-lg rounded-2xl mt-md text-primary-dark animate-fade-in-down">
     <div class="data grid grid-cols-6 gap-md pt-md">
       <div
         class="flex items-center space-x-md col-span-full xl:col-span-2 xl:border-r border-primary-border"

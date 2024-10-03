@@ -1,19 +1,19 @@
 <template>
   <div class="grid grid-cols-12 gap-sm md:gap-md">
     <div
-      class="bg-white py-md px-sm md:px-lg rounded-2xl flex col-span-12 lg:col-span-6 xl:col-span-4"
+      class="bg-white py-md px-sm md:px-lg rounded-2xl flex col-span-12 lg:col-span-6 xl:col-span-4 animate-fade-in-down"
     >
       <TotalSales />
     </div>
 
     <div
-      class="bg-white py-md px-sm md:px-lg rounded-2xl flex flex-col gap-sm md:gap-lg justify-between col-span-12 lg:col-span-6 xl:col-span-3"
+      class="bg-white py-md px-sm md:px-lg rounded-2xl animate-fade-in-down flex flex-col gap-sm md:gap-lg justify-between col-span-12 lg:col-span-6 xl:col-span-3"
     >
       <TotalProfit />
     </div>
 
     <div
-      class="bg-white py-md px-sm md:px-lg rounded-2xl flex flex-col gap-xs justify-between col-span-12 xl:col-span-5"
+      class="bg-white py-md px-sm md:px-lg rounded-2xl animate-fade-in-down flex flex-col gap-xs justify-between col-span-12 xl:col-span-5"
     >
       <CountryStats />
     </div>

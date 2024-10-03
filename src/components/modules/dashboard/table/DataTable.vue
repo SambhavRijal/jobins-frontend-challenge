@@ -1,93 +1,89 @@
 <template>
-  <div class="">
-    <div class="bg-white md:px-lg py-xs rounded-2xl my-md text-primary-dark">
-      <div class="search-table-outter overflow-x-auto wrapper">
-        <table class="search-table inner w-full">
-          <thead>
-            <tr class="text-left text-sm text-primary-gray font-medium border-b border-gray-200">
-              <th class="py-sm px-xs whitespace-nowrap">ID</th>
-              <th class="py-sm px-xs whitespace-nowrap">CUSTOMER</th>
-              <th class="py-sm px-xs whitespace-nowrap">DATE</th>
-              <th class="py-sm px-xs whitespace-nowrap">TOTAL</th>
-              <th class="py-sm px-xs whitespace-nowrap">METHOD</th>
-              <th class="py-sm px-xs whitespace-nowrap">STATUS</th>
-              <th class="py-sm px-xs whitespace-nowrap">ACTION</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="item in tableData" :key="item.id" class="border-b border-gray-200">
-              <td class="py-sm px-xs whitespace-nowrap">#{{ item.oid }}</td>
-              <td class="py-sm px-xs whitespace-nowrap">{{ item.customer }}</td>
-              <td class="py-sm px-xs whitespace-nowrap">{{ item?.createdAt }}</td>
-              <td class="py-sm px-xs whitespace-nowrap">${{ item.total }}</td>
-              <td class="py-sm px-xs whitespace-nowrap">{{ item.method }}</td>
-              <td class="py-sm px-xs text-secondary-orange font-semibold whitespace-nowrap">
-                {{ item.status }}
-              </td>
-              <td class="py-xs px-xs whitespace-nowrap">
-                <a href="#" class="text-secondary-blue hover:underline">View Details</a>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+  <div class="bg-white md:px-lg py-xs rounded-2xl my-md text-primary-dark animate-fade-in-down">
+    <div class="search-table-outter overflow-x-auto wrapper">
+      <table class="search-table inner w-full">
+        <thead>
+          <tr class="text-left text-sm text-primary-gray font-medium border-b border-gray-200">
+            <th class="py-sm px-xs whitespace-nowrap">ID</th>
+            <th class="py-sm px-xs whitespace-nowrap">CUSTOMER</th>
+            <th class="py-sm px-xs whitespace-nowrap">DATE</th>
+            <th class="py-sm px-xs whitespace-nowrap">TOTAL</th>
+            <th class="py-sm px-xs whitespace-nowrap">METHOD</th>
+            <th class="py-sm px-xs whitespace-nowrap">STATUS</th>
+            <th class="py-sm px-xs whitespace-nowrap">ACTION</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="item in tableData" :key="item.id" class="border-b border-gray-200">
+            <td class="py-sm px-xs whitespace-nowrap">#{{ item.oid }}</td>
+            <td class="py-sm px-xs whitespace-nowrap">{{ item.customer }}</td>
+            <td class="py-sm px-xs whitespace-nowrap">{{ item?.createdAt }}</td>
+            <td class="py-sm px-xs whitespace-nowrap">${{ item.total }}</td>
+            <td class="py-sm px-xs whitespace-nowrap">{{ item.method }}</td>
+            <td class="py-sm px-xs text-secondary-orange font-semibold whitespace-nowrap">
+              {{ item.status }}
+            </td>
+            <td class="py-xs px-xs whitespace-nowrap">
+              <a href="#" class="text-secondary-blue hover:underline">View Details</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="flex flex-col gap-xs md:gap-none sm:flex-row justify-between md:items-center mt-sm">
+      <div class="text-sm text-gray-500 mb-xs sm:mb-none">
+        Showing
+        <button
+          class="px-xs py-xxs mx-xs rounded-md border border-secondary-gray text-primary-dark font-medium"
+        >
+          <div class="flex items-center gap-xxs">
+            <select
+              class="border-none outline-none bg-transparent"
+              v-model="limit"
+              @change="handleLimitChange"
+            >
+              <option value="5">5</option>
+              <option value="10">10</option>
+              <option value="20">20</option>
+              <option value="30">30</option>
+            </select>
+            <IconChevronDown size="16" />
+          </div>
+        </button>
+
+        of {{ totalEntries }} entries
       </div>
-
-      <div
-        class="flex flex-col gap-xs md:gap-none sm:flex-row justify-between md:items-center mt-sm"
-      >
-        <div class="text-sm text-gray-500 mb-xs sm:mb-none">
-          Showing
-          <button
-            class="px-xs py-xxs mx-xs rounded-md border border-secondary-gray text-primary-dark font-medium"
-          >
-            <div class="flex items-center gap-xxs">
-              <select
-                class="border-none outline-none bg-transparent"
-                v-model="limit"
-                @change="handleLimitChange"
-              >
-                <option value="5">5</option>
-                <option value="10">10</option>
-                <option value="20">20</option>
-                <option value="30">30</option>
-              </select>
-              <IconChevronDown size="16" />
-            </div>
-          </button>
-
-          of {{ totalEntries }} entries
-        </div>
-        <div class="flex gap-xxs">
-          <button
-            class="px-sm h-fit py-xxs rounded-md bg-primary-light text-primary-gray hover:bg-secondary-blue/50 hover:text-white transition-colors duration-200"
-            @click="handlePageChange(currentPage - 1)"
-            :disabled="currentPage === 1"
-            :class="{ 'opacity-50 cursor-not-allowed': currentPage === 1 }"
-          >
-            &lt;
-          </button>
-          <button
-            v-for="page in pages"
-            :key="page"
-            @click="handlePageChange(page)"
-            class="text-xs md:text-base px-sm h-fit py-xxs rounded-md transition-colors duration-200"
-            :class="
-              page === currentPage
-                ? 'bg-secondary-blue text-white'
-                : 'bg-primary-light text-primary-gray hover:bg-secondary-blue/50 hover:text-white'
-            "
-          >
-            {{ page }}
-          </button>
-          <button
-            class="px-sm h-fit py-xxs rounded-md bg-primary-light text-primary-gray hover:bg-secondary-blue/50 hover:text-white transition-colors duration-200"
-            @click="handlePageChange(currentPage + 1)"
-            :disabled="currentPage === totalPages"
-            :class="{ 'opacity-50 cursor-not-allowed': currentPage === totalPages }"
-          >
-            &gt;
-          </button>
-        </div>
+      <div class="flex gap-xxs">
+        <button
+          class="px-sm h-fit py-xxs rounded-md bg-primary-light text-primary-gray hover:bg-secondary-blue/50 hover:text-white transition-colors duration-200"
+          @click="handlePageChange(currentPage - 1)"
+          :disabled="currentPage === 1"
+          :class="{ 'opacity-50 cursor-not-allowed': currentPage === 1 }"
+        >
+          &lt;
+        </button>
+        <button
+          v-for="page in pages"
+          :key="page"
+          @click="handlePageChange(page)"
+          class="text-xs md:text-base px-sm h-fit py-xxs rounded-md transition-colors duration-200"
+          :class="
+            page === currentPage
+              ? 'bg-secondary-blue text-white'
+              : 'bg-primary-light text-primary-gray hover:bg-secondary-blue/50 hover:text-white'
+          "
+        >
+          {{ page }}
+        </button>
+        <button
+          class="px-sm h-fit py-xxs rounded-md bg-primary-light text-primary-gray hover:bg-secondary-blue/50 hover:text-white transition-colors duration-200"
+          @click="handlePageChange(currentPage + 1)"
+          :disabled="currentPage === totalPages"
+          :class="{ 'opacity-50 cursor-not-allowed': currentPage === totalPages }"
+        >
+          &gt;
+        </button>
       </div>
     </div>
   </div>

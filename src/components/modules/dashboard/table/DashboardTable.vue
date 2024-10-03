@@ -1,7 +1,8 @@
 <template>
   <div class="mt-md">
+    <!-- Table Controls -->
     <div
-      class="table-controls flex flex-col gap-sm md:gap-none md:flex-row justify-between text-primary-gray"
+      class="table-controls animate-fade-in-down flex flex-col gap-sm md:gap-none md:flex-row justify-between text-primary-gray"
     >
       <div class="left flex flex-col sm:flex-row gap-sm w-full md:w-2/3 lg:w-1/3">
         <!-- Status Select -->
