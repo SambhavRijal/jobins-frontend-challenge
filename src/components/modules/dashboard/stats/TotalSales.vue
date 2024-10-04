@@ -1,6 +1,6 @@
 <template>
   <div
-    class="image w-1/4 md:w-1/3 border-r border-primary-border pr-xs md:pr-sm flex items-center justify-center"
+    class="image w-fit sm:w-1/4 md:w-1/3 border-r border-primary-border pr-xs md:pr-sm flex items-center justify-center"
   >
     <img src="@/assets/business-and-finance.png" alt="US Flag" class="mr-xs" />
   </div>
