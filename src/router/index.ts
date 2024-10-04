@@ -28,6 +28,11 @@ const router = createRouter({
       path: '/product-list',
       name: 'product-list',
       component: UnderConstruction
+    },
+    {
+      path: '/settings',
+      name: 'settings',
+      component: UnderConstruction
     }
   ]
 })
