@@ -31,9 +31,7 @@ const checkScreenSize = () => {
 }
 
 const toggleSidebar = () => {
-  if (window.innerWidth > 788) {
-    sidebarOpen.value = !sidebarOpen.value
-  }
+  sidebarOpen.value = !sidebarOpen.value
 }
 
 onMounted(() => {

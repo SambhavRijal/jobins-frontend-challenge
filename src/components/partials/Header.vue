@@ -1,16 +1,16 @@
 <template>
-  <header class="h-[70px] flex items-center justify-between px-md pr-lg relative">
-    <div class="title text-2xl font-bold">{{ pageTitle }}</div>
-    <div class="actions flex gap-md">
+  <header class="h-[70px] flex items-center justify-between px-xs md:px-md md:pr-lg relative">
+    <div class="title text-xl md:text-2xl font-bold">{{ pageTitle }}</div>
+    <div class="actions flex gap-xs md:gap-md">
       <!-- Notification button -->
       <div
         class="notification relative px-xxs flex items-center cursor-pointer transition-transform duration-200 hover:scale-110"
         @click.stop="toggleNotificationMenu"
       >
-        <IconBell class="w-[26px] h-[36px] text-primary-gray" />
+        <IconBell class="w-[22px] h-[22px] sm:w-[26px] sm:h-[36px] text-primary-gray" />
         <div
           v-if="unreadNotificationsCount > 0"
-          class="absolute top-none right-none text-xs w-[18px] h-[18px] font-semibold text-white flex justify-center items-center bg-danger-default rounded-full"
+          class="absolute top-none right-none text-xs w-[12px] h-[12px] sm:w-[18px] sm:h-[18px] font-semibold text-white flex justify-center items-center bg-danger-default rounded-full"
         >
           {{ unreadNotificationsCount }}
         </div>
@@ -63,7 +63,11 @@
         class="avatar relative px-xxs cursor-pointer transition-transform duration-200 hover:scale-110"
         @click.stop="toggleProfileMenu"
       >
-        <img src="@/assets/avatar.webp" alt="Avatar" class="w-[38px] h-[38px] rounded-full" />
+        <img
+          src="@/assets/avatar.webp"
+          alt="Avatar"
+          class="w-[32px] h-[32px] sm:w-[38px] sm:h-[38px] rounded-full"
+        />
         <!-- Online status indicator -->
         <div
           class="border-2 border-white absolute bottom-none right-none text-sm w-[16px] h-[16px] font-semibold text-white flex justify-center items-center bg-success-default rounded-full"

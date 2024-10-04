@@ -46,7 +46,7 @@
     </div>
 
     <div class="flex flex-col gap-xs md:gap-none sm:flex-row justify-between md:items-center mt-sm">
-      <div class="text-sm text-gray-500 mb-xs sm:mb-none">
+      <div class="pl-xs md:pl-none text-sm text-gray-500 mb-xs sm:mb-none">
         Showing
         <button
           class="px-xs py-xxs mx-xs rounded-md border border-secondary-gray text-primary-dark font-medium"
@@ -68,9 +68,9 @@
 
         of {{ totalEntries }} entries
       </div>
-      <div class="flex gap-xxs">
+      <div class="flex gap-xxs justify-center xs:justify-start">
         <button
-          class="px-sm h-fit py-xxs rounded-md bg-primary-light text-primary-gray hover:bg-secondary-blue/50 hover:text-white transition-colors duration-200"
+          class="text-xs md:text-base px-msm md:px-sm md:h-fit py-xxs rounded-md bg-primary-light text-primary-gray hover:bg-secondary-blue/50 hover:text-white transition-colors duration-200"
           @click="handlePageChange(currentPage - 1)"
           :disabled="currentPage === 1"
           :class="{ 'opacity-50 cursor-not-allowed': currentPage === 1 }"
@@ -91,7 +91,7 @@
           {{ page }}
         </button>
         <button
-          class="px-sm h-fit py-xxs rounded-md bg-primary-light text-primary-gray hover:bg-secondary-blue/50 hover:text-white transition-colors duration-200"
+          class="text-xs md:text-base px-msm md:px-sm md:h-fit py-xxs rounded-md bg-primary-light text-primary-gray hover:bg-secondary-blue/50 hover:text-white transition-colors duration-200"
           @click="handlePageChange(currentPage + 1)"
           :disabled="currentPage === totalPages"
           :class="{ 'opacity-50 cursor-not-allowed': currentPage === totalPages }"
