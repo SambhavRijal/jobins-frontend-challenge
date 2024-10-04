@@ -27,7 +27,7 @@
         -
         {{ menuGroup.title }}
       </p>
-      <nav class="flex flex-col gap-xs mt-4">
+      <nav class="flex flex-col gap-xs mt-xs">
         <RouterLink
           v-for="(item, itemIndex) in menuGroup.children"
           :key="itemIndex"
