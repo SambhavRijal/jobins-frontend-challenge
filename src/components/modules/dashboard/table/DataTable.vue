@@ -20,6 +20,11 @@
             </td>
           </tr>
         </tbody>
+        <tbody v-else-if="tableData.length === 0">
+          <tr>
+            <td colspan="7" class="text-center py-lg text-primary-gray">No entries available</td>
+          </tr>
+        </tbody>
         <tbody v-else>
           <tr v-for="item in tableData" :key="item.id" class="border-b border-gray-200">
             <td class="py-sm px-xs whitespace-nowrap">#{{ item.oid }}</td>
