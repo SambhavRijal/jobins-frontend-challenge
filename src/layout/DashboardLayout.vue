@@ -19,7 +19,7 @@
 </template>
 
 <script setup>
-import { RouterLink, RouterView } from 'vue-router'
+import { RouterView } from 'vue-router'
 import Sidebar from '@/components/partials/Sidebar.vue'
 import Header from '@/components/partials/Header.vue'
 import { onMounted, onUnmounted, ref } from 'vue'

@@ -128,17 +128,23 @@ module.exports = {
     },
     extend: {
       keyframes: {
-        'fade-in-down': {
+        'pop-in': {
           '0%': {
-            opacity: '0'
+            opacity: '0',
+            transform: 'scale(0.8)'
+          },
+          '50%': {
+            opacity: '0.5',
+            transform: 'scale(1.05)'
           },
           '100%': {
-            opacity: '1'
+            opacity: '1',
+            transform: 'scale(1)'
           }
         }
       },
       animation: {
-        'fade-in-down': 'fade-in-down 1s ease-out'
+        'fade-in-down': 'pop-in 0.4s ease-out'
       }
     }
   },

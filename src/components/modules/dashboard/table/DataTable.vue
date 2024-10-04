@@ -17,7 +17,7 @@
           <tr v-for="item in tableData" :key="item.id" class="border-b border-gray-200">
             <td class="py-sm px-xs whitespace-nowrap">#{{ item.oid }}</td>
             <td class="py-sm px-xs whitespace-nowrap">{{ item.customer }}</td>
-            <td class="py-sm px-xs whitespace-nowrap">{{ item?.createdAt }}</td>
+            <td class="py-sm px-xs whitespace-nowrap">{{ formatDate(item?.createdAt) }}</td>
             <td class="py-sm px-xs whitespace-nowrap">${{ item.total }}</td>
             <td class="py-sm px-xs whitespace-nowrap">{{ item.method }}</td>
             <td class="py-sm px-xs text-secondary-orange font-semibold whitespace-nowrap">
@@ -97,6 +97,7 @@ td {
 </style>
 
 <script setup lang="ts">
+import { formatDate } from '@/utils/helpers/formatDate'
 import { computed, ref, watch } from 'vue'
 const props = defineProps<{
   tableData: any

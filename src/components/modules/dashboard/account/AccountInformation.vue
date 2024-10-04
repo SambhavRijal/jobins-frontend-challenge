@@ -21,22 +21,28 @@
     </div>
     <div class="tab-controls flex gap-sm w-full text-sm md:text-base overflow-x-auto">
       <div
-        class="tab px-sm py-xs cursor-pointer transition-colors duration-300 hover:text-secondary-blue whitespace-nowrap"
-        :class="{ 'text-secondary-blue border-b-2 border-secondary-blue': status === 'all' }"
+        class="tab px-sm py-xs cursor-pointer transition-colors duration-500 hover:text-secondary-blue hover:border-b-2 hover:border-secondary-blue hover:border-opacity-50 whitespace-nowrap"
+        :class="{
+          'text-secondary-blue border-b-2 border-secondary-blue ': status === 'all'
+        }"
         @click="handleStatusChange('all')"
       >
         All Orders
       </div>
       <div
-        class="tab px-sm py-xs cursor-pointer transition-colors duration-300 hover:text-secondary-blue whitespace-nowrap"
-        :class="{ 'text-secondary-blue border-b-2 border-secondary-blue': status === 'completed' }"
+        class="tab px-sm py-xs cursor-pointer transition-colors duration-500 hover:text-secondary-blue hover:border-b-2 hover:border-secondary-blue hover:border-opacity-50 whitespace-nowrap"
+        :class="{
+          'text-secondary-blue border-b-2 border-secondary-blue ': status === 'completed'
+        }"
         @click="handleStatusChange('completed')"
       >
         Completed
       </div>
       <div
-        class="tab px-sm py-xs cursor-pointer transition-colors duration-300 hover:text-secondary-blue whitespace-nowrap"
-        :class="{ 'text-secondary-blue border-b-2 border-secondary-blue': status === 'canceled' }"
+        class="tab px-sm py-xs cursor-pointer transition-colors duration-500 hover:text-secondary-blue hover:border-b-2 hover:border-secondary-blue hover:border-opacity-50 whitespace-nowrap"
+        :class="{
+          'text-secondary-blue border-b-2 border-secondary-blue ': status === 'canceled'
+        }"
         @click="handleStatusChange('canceled')"
       >
         Canceled
