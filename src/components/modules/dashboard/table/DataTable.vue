@@ -27,8 +27,15 @@
             <td class="py-sm px-xs whitespace-nowrap">{{ formatDate(item?.createdAt) }}</td>
             <td class="py-sm px-xs whitespace-nowrap">${{ item.total }}</td>
             <td class="py-sm px-xs whitespace-nowrap">{{ item.method }}</td>
-            <td class="py-sm px-xs text-secondary-orange font-semibold whitespace-nowrap">
-              {{ item.status }}
+            <td
+              class="py-sm px-xs font-semibold whitespace-nowrap"
+              :class="{
+                'text-secondary-orange': item.status === 'pending',
+                'text-success-default': item.status === 'completed',
+                'text-danger-default': item.status === 'canceled'
+              }"
+            >
+              {{ item.status.charAt(0).toUpperCase() + item.status.slice(1) }}
             </td>
             <td class="py-xs px-xs whitespace-nowrap">
               <a href="#" class="text-secondary-blue hover:underline">View Details</a>

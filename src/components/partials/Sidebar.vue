@@ -17,7 +17,7 @@
       </div>
     </div>
     <div v-for="(menuGroup, index) in menuItems" :key="index">
-      <p class="text-xs uppercase text-primary-gray py-sm px-sm" v-if="sidebarOpen">
+      <p class="text-xs uppercase text-primary-gray py-sm px-sm" v-if="sidebarOpen">-
         {{ menuGroup.title }}
       </p>
       <nav class="flex flex-col gap-xs mt-4">
@@ -26,17 +26,17 @@
           :key="itemIndex"
           :to="item.link"
           class="flex items-center py-xs px-sm transition-colors duration-200 hover:bg-gray-200 rounded-md"
-          :class="{ 'bg-secondary-light': item.active }"
+          :class="{ 'bg-secondary-light': isActive(item.link) }"
         >
           <component
             :is="item.icon"
             class="w-[28px] h-[28px]"
-            :class="{ 'text-primary-dark': item.active }"
+            :class="{ 'text-primary-dark': isActive(item.link) }"
           />
           <span
             v-if="sidebarOpen"
             class="ml-sm"
-            :class="{ 'font-semibold text-primary-dark': item.active }"
+            :class="{ 'font-semibold text-primary-dark': isActive(item.link) }"
             >{{ item.title }}</span
           >
         </RouterLink>
@@ -46,8 +46,8 @@
 </template>
 
 <script setup lang="ts">
-import { RouterLink } from 'vue-router'
-import { defineProps, ref } from 'vue'
+import { RouterLink, useRoute } from 'vue-router'
+import { defineProps, ref, computed } from 'vue'
 import {
   IconSmartHome,
   IconShoppingCart,
@@ -67,11 +67,17 @@ const toggleSidebar = () => {
   emit('toggleSidebar')
 }
 
+const route = useRoute()
+
+const isActive = computed(() => (path: string) => {
+  return route.path === path
+})
+
 const menuItems = ref([
   {
     title: 'Main Menu',
     children: [
-      { title: 'Dashboard', link: '/', icon: IconSmartHome, active: true },
+      { title: 'Dashboard', link: '/', icon: IconSmartHome },
       { title: 'Order Management', link: '/orders', icon: IconShoppingCart },
       { title: 'Brand', link: '/brands', icon: IconStar }
     ]
