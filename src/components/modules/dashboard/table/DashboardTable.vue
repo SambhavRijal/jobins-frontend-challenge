@@ -64,6 +64,7 @@
       :totalEntries="totalEntries"
       @limitChange="handleLimitChange"
       @pageChange="handlePageChange"
+      :loading="loading"
     />
   </div>
 </template>
@@ -90,8 +91,10 @@ const dateRange = ref('all')
 const searchQuery = ref('')
 const status = computed(() => props.status)
 const emit = defineEmits(['statusChange'])
+const loading = ref(false)
 
 const getTableData = async () => {
+  loading.value = true
   const res = await GetRequest(
     `/orders/search?search=${searchQuery.value}&page=${currentPage.value}&limit=${pageLimit.value}&status=${status.value}&dateRange=${dateRange.value}`
   )
@@ -99,7 +102,7 @@ const getTableData = async () => {
   totalPages.value = res.data.pages
   currentPage.value = res.data.page
   totalEntries.value = res.data.total
-  console.log('totalPages', totalPages.value)
+  loading.value = false
 }
 
 const handleSearch = (searchQuery) => {

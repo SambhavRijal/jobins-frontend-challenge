@@ -13,7 +13,14 @@
             <th class="py-sm px-xs whitespace-nowrap">ACTION</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody v-if="loading">
+          <tr>
+            <td colspan="7" class="">
+              <div class="loader mx-auto my-md mt-lg"></div>
+            </td>
+          </tr>
+        </tbody>
+        <tbody v-else>
           <tr v-for="item in tableData" :key="item.id" class="border-b border-gray-200">
             <td class="py-sm px-xs whitespace-nowrap">#{{ item.oid }}</td>
             <td class="py-sm px-xs whitespace-nowrap">{{ item.customer }}</td>
@@ -105,6 +112,7 @@ const props = defineProps<{
   currentPage: number
   pageLimit: number
   totalEntries: number
+  loading: boolean
 }>()
 
 const emit = defineEmits(['limitChange', 'pageChange'])

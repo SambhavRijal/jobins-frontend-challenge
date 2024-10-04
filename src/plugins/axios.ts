@@ -3,8 +3,8 @@ import axios from 'axios'
 
 const baseAxios: AxiosInstance = axios.create()
 
-baseAxios.defaults.baseURL = 'http://localhost:3002'
-// baseAxios.defaults.baseURL = 'https://jobins-challenge-backend.onrender.com/'
+// baseAxios.defaults.baseURL = 'http://localhost:3002'
+baseAxios.defaults.baseURL = 'https://jobins-challenge-backend.onrender.com/'
 
 // Add a request interceptor
 baseAxios.interceptors.request.use(

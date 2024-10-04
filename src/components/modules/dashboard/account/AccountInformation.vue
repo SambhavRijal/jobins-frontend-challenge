@@ -1,6 +1,9 @@
 <template>
   <div class="bg-white px-sm md:px-lg rounded-2xl mt-md text-primary-dark animate-fade-in-down">
-    <div class="data grid grid-cols-6 gap-md pt-md">
+    <div
+      v-if="userInfo && Object.keys(userInfo).length > 0"
+      class="data grid grid-cols-6 gap-md pt-md"
+    >
       <div
         class="flex items-center space-x-md col-span-full xl:col-span-2 xl:border-r border-primary-border"
       >
@@ -18,6 +21,9 @@
       >
         <AddressInfo :userInfo="userInfo" />
       </div>
+    </div>
+    <div v-else class="flex justify-center items-center h-[20vh] bg-white rounded-2xl">
+      <div class="loader"></div>
     </div>
     <div class="tab-controls flex gap-sm w-full text-sm md:text-base overflow-x-auto">
       <div
